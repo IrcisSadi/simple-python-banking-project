@@ -1,57 +1,72 @@
-import random
+#python-banking-program
 
-#● ┌ ─ ┐ │ └ ┘
+def show_balance(balance):
+    print("*******************************")
+    print(f"Your Balance is P{balance:.2f}")
+    print("*******************************")
 
-dice_art ={
-    1:("┌─────────┐", 
-       "│         │", 
-       "│    ●    │" , 
-       "│         │" , 
-       "└─────────┘"),
+def deposit():
+    print("*******************************")
+    amount = float(input("Enter an amount to be deposited: P"))
+    print("*******************************")
+
+    if amount < 0:
+        print("*******************************")
+        print("Thats not a valid amount")
+        print("*******************************")
+        return 0
+    else:
+        return amount
+
+def withdraw(balance):
+    print("*******************************")
+    amount = float(input("Enter an amount to be withdrawn: P"))
+    print("*******************************")
+
+    if amount > balance:
+        print("*******************************")
+        print("Insufficient funds")
+        print("*******************************")
+        return 0
+    elif amount < 0:
+        print("*******************************")
+        print("Amount must be greater than zero")
+        print("*******************************")
+        return 0
+    else:
+        return amount
     
-    2:("┌─────────┐", 
-       "│ ●       │", 
-       "│         │" , 
-       "│       ● │" , 
-       "└─────────┘"),
-    3:("┌─────────┐", 
-       "│ ●       │", 
-       "│    ●    │" , 
-       "│       ● │" , 
-       "└─────────┘"),
-    4:("┌─────────┐", 
-       "│ ●     ● │", 
-       "│         │" , 
-       "│ ●     ● │" , 
-       "└─────────┘"),
-    5:("┌─────────┐", 
-       "│ ●     ● │", 
-       "│    ●    │" , 
-       "│ ●     ● │" , 
-       "└─────────┘"),
-    6:("┌─────────┐", 
-       "│ ●     ● │", 
-       "│ ●     ● │" , 
-       "│ ●     ● │" , 
-       "└─────────┘")
+def main():   
+    balance = 0 
+    is_running = True
 
-} 
-dice = []
-total = 0
-num_of_dice = int(input("How many Dice? "))
+    while is_running:
+        print("***********************")
+        print("    Banking Program    ")
+        print("***********************")
+        print("1. Show Balance")
+        print("2. Deposit")
+        print("3. Withdraw")
+        print("4. Exit")
 
-for die in range(num_of_dice):
-    dice.append(random.randint(1, 6))
+        choice = input("Enter your choice (1-4): ")
 
-#for die in range(num_of_dice):
-#    for line in dice_art.get(dice[die]):
-#        print(line)
+        if choice == '1':
+            show_balance(balance)
+        elif choice == '2':
+            balance += deposit()
+        elif choice == '3':
+            balance -= withdraw(balance)
+        elif choice == '4':
+            is_running = False
+        else:
+            print("********************************")
+            print("That is not part of the choice!!")
+            print("********************************")
+    
+    print("******************************")
+    print("Thank you for using this Bank!")
+    print("******************************")
 
-for line in range(5):
-    for die in dice:
-        print(dice_art.get(die)[line], end=" ")
-    print()
-
-for die in dice:
-    total += die
-print(f"Total: {total}")
+if __name__ == '__main__':
+    main()
